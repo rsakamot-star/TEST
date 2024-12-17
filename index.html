@@ -1,2 +1,44 @@
 <script src="https://cdn.jsdelivr.net/gh/kitao/pyxel/wasm/pyxel.js"></script>
 <pyxel-play root="https://rsakamot-star.github.io/testPython" gamepad="enabled" name="main.pyxapp"></pyxel-play>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Pyxelデータのグラフ</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Pyxelデータのグラフ</h1>
+  <canvas id="myChart" width="400" height="200"></canvas>
+
+  <script>
+    fetch('Zenith.json')
+      .then(response => response.json())
+      .then(data => {
+        // Chart.jsでグラフを描画
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',  // 折れ線グラフ
+          data: {
+            labels: Array.from({length: data.length}, (_, i) => i), // X軸: インデックス
+            datasets: [{
+              label: 'Pyxel 結果データ',
+              data: data, // Y軸: JSONのデータ
+              borderColor: 'blue',
+              borderWidth: 2,
+              fill: false
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              x: { title: { display: true, text: 'Frame' } },
+              y: { title: { display: true, text: 'Value' } }
+            }
+          }
+        });
+      })
+      .catch(error => console.error('Error loading JSON:', error));
+  </script>
+</body>
+</html>
