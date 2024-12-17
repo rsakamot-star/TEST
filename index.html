@@ -1,15 +1,44 @@
-<script src="https://cdn.jsdelivr.net/gh/kitao/pyxel/wasm/pyxel.js"></script>
-<pyxel-play root="https://rsakamot-star.github.io/testPython" gamepad="enabled" name="main.pyxapp"></pyxel-play>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <title>Pyxelデータのグラフ</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/kitao/pyxel/wasm/pyxel.js"></script>
+  <style>
+    /* Flexboxで横並びにする */
+    .container {
+      display: flex;
+      justify-content: space-around; /* 要素間の余白調整 */
+      align-items: flex-start; /* 上揃え */
+      flex-wrap: wrap; /* 画面が小さい場合折り返す */
+      margin: 20px;
+    }
+    .pyxel-container, .chart-container {
+      flex: 1; /* 幅を均等に分割 */
+      min-width: 300px; /* 最小幅を設定 */
+      text-align: center;
+    }
+    h1 {
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <h1>Pyxelデータのグラフ</h1>
-  <canvas id="myChart" width="400" height="200"></canvas>
+  <h1>Pyxelアプリとデータグラフ</h1>
+  <div class="container">
+    <!-- Pyxelアプリのエリア -->
+    <div class="pyxel-container">
+      <h2>Pyxel アプリ</h2>
+      <pyxel-play root="https://rsakamot-star.github.io/testPython" gamepad="enabled" name="main.pyxapp"></pyxel-play>
+    </div>
+
+    <!-- グラフのエリア -->
+    <div class="chart-container">
+      <h2>データグラフ</h2>
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+  </div>
 
   <script>
     fetch('Zenith.json')
