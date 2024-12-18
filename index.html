@@ -18,9 +18,9 @@
     }
   </style>
   <script>
-    function openGameInNewTab() {
+    function openGameAndIframe() {
       // 新しいタブでPyxelゲームを開く
-      window.open("https://rsakamot-star.github.io/testPython", "_blank");
+      var gameTab = window.open("https://rsakamot-star.github.io/testPython", "_blank");
 
       // 既存のページでiframeを表示
       document.getElementById("startButton").style.display = 'none';
@@ -39,7 +39,7 @@
   <pyxel-play root="https://rsakamot-star.github.io/testPython" name="main.pyxapp"></pyxel-play>
 
   <!-- ボタン -->
-  <button id="startButton" onclick="openGameInNewTab()">Start Game</button>
+  <button id="startButton" onclick="openGameAndIframe()">Start Game</button>
 
   <!-- iframeを使ってポップアップページを埋め込む部分 -->
   <div id="iframe-container">
