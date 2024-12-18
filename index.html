@@ -13,17 +13,17 @@
       popupWindow = window.open('about:blank', 'popup', 'width=600,height=400');
     };
 
-    // ポップアップが開いてからゲームを開始する処理を実行する
-    function startPyxelGame() {
+    // ポップアップが開いてから指定されたURLをロード
+    function startGame() {
       // 実際のページをポップアップで表示
       if (popupWindow) {
-        popupWindow.location.href = 'https://rsakamot-star.github.io/testPython'; // PyxelゲームのURLを設定
+        popupWindow.location.href = 'https://rsakamoto.pythonanywhere.com'; // ここを指定されたURLに設定
       }
     }
   </script>
 </head>
 <body>
-  <button onclick="startPyxelGame()">Start Game</button>
+  <button onclick="startGame()">Start Game</button>
   <!-- Pyxelゲームの埋め込み -->
   <script src="https://cdn.jsdelivr.net/gh/kitao/pyxel/wasm/pyxel.js"></script>
   <pyxel-play root="https://rsakamot-star.github.io/testPython" name="main.pyxapp"></pyxel-play>
