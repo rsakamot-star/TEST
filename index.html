@@ -11,18 +11,23 @@
       border: 1px solid #ccc;
       display: none; /* 初めは非表示 */
     }
+    #startButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
   <script>
     function openIframeAndLoadPage() {
+      // ボタンを非表示にする
+      document.getElementById("startButton").style.display = 'none';
+
       // iframeを表示
       document.getElementById('iframe-container').style.display = 'block';
 
       // iframe内でロードするURLを設定
       var iframe = document.getElementById('iframe');
       iframe.src = 'https://rsakamoto.pythonanywhere.com'; // ここにポップアップURLを指定
-
-      // ボタンを非表示にする
-      document.getElementById("startButton").style.display = 'none';
     }
   </script>
 </head>
