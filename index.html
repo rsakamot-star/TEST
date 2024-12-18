@@ -1,2 +1,31 @@
-<script src="https://cdn.jsdelivr.net/gh/kitao/pyxel/wasm/pyxel.js"></script>
-<pyxel-play root="https://rsakamot-star.github.io/testPython" name="main.pyxapp"></pyxel-play>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup and Pyxel Game</title>
+  <script>
+    let popupWindow;
+
+    // ページがロードされたときにポップアップを開く
+    window.onload = function() {
+      // 空のページをポップアップで開く
+      popupWindow = window.open('about:blank', 'popup', 'width=600,height=400');
+    };
+
+    // ポップアップが開いてからゲームを開始する処理を実行する
+    function startPyxelGame() {
+      // 実際のページをポップアップで表示
+      if (popupWindow) {
+        popupWindow.location.href = 'https://rsakamot-star.github.io/testPython'; // PyxelゲームのURLを設定
+      }
+    }
+  </script>
+</head>
+<body>
+  <button onclick="startPyxelGame()">Start Game</button>
+  <!-- Pyxelゲームの埋め込み -->
+  <script src="https://cdn.jsdelivr.net/gh/kitao/pyxel/wasm/pyxel.js"></script>
+  <pyxel-play root="https://rsakamot-star.github.io/testPython" name="main.pyxapp"></pyxel-play>
+</body>
+</html>
