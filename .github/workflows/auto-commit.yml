@@ -1,36 +1,35 @@
-name: Auto Commit JSON Files
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # mainブランチへの変更がトリガー
+      - main  # mainブランチに変更があったときに実行
 
 jobs:
-  commit-json:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Node.js and Pyxel
+    - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'  # 最新のNode.jsバージョンを使用
+        node-version: '16'  # 必要に応じてNode.jsのバージョンを変更
 
-    - name: Install dependencies for Pyxel
+    - name: Install dependencies
       run: |
-        npm install -g pyxel  # Pyxelをグローバルにインストール（必要に応じてインストール）
+        npm install -g pyxel  # 必要に応じてPyxelの依存関係をインストール
 
-    - name: Download and run Pyxel game
+    - name: Build game (if applicable)
       run: |
-        mkdir -p output  # 結果を保存するディレクトリを作成
-        curl -o main.pyxapp https://rsakamot-star.github.io/MainPythonFile/main.pyxapp  # ゲームファイルをダウンロード
-        pyxel run main.pyxapp  # Pyxelゲームを実行して、結果を生成
+        # ゲームのビルドや準備があればここに追加します
+        echo "ゲームビルド処理があればここに記述"
 
-    - name: Commit and push generated JSON files
-      uses: EndBug/add-and-commit@v7
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        author_name: 'GitHub Actions'
-        author_email: 'actions@github.com'
-        message: 'Update JSON files after running Pyxel game'
+        branch: gh-pages  # デプロイ先のブランチ
+        folder: docs       # デプロイするディレクトリ（例: docs/）
+        token: ${{ secrets.GITHUB_TOKEN }}  # GitHub Actionsに自動的にトークンを渡す
