@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open Pyxel Game and Iframe in Separate Tabs</title>
+  <title>Pyxel Game and Iframe</title>
   <style>
     #iframe-container {
       width: 100%;
@@ -33,6 +33,10 @@
   </script>
 </head>
 <body>
+
+  <!-- Pyxelゲームの表示 -->
+  <script src="https://cdn.jsdelivr.net/gh/kitao/pyxel/wasm/pyxel.js"></script>
+  <pyxel-play root="https://rsakamot-star.github.io/testPython" name="main.pyxapp"></pyxel-play>
 
   <!-- ボタン -->
   <button id="startButton" onclick="openGameInNewTab()">Start Game</button>
