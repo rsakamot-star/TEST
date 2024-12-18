@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Embed Popup Page with iframe</title>
+  <title>Open Pyxel Game and Iframe in Separate Tabs</title>
   <style>
     #iframe-container {
       width: 100%;
@@ -18,23 +18,24 @@
     }
   </style>
   <script>
-    function openIframeAndLoadPage() {
-      // ボタンを非表示にする
-      document.getElementById("startButton").style.display = 'none';
+    function openGameInNewTab() {
+      // 新しいタブでPyxelゲームを開く
+      window.open("https://rsakamot-star.github.io/testPython", "_blank");
 
-      // iframeを表示
+      // 既存のページでiframeを表示
+      document.getElementById("startButton").style.display = 'none';
       document.getElementById('iframe-container').style.display = 'block';
 
-      // iframe内でロードするURLを設定
+      // iframe内で指定されたURLを表示
       var iframe = document.getElementById('iframe');
-      iframe.src = 'https://rsakamoto.pythonanywhere.com'; // ここにポップアップURLを指定
+      iframe.src = 'https://rsakamoto.pythonanywhere.com'; // ここにURLを設定
     }
   </script>
 </head>
 <body>
 
   <!-- ボタン -->
-  <button id="startButton" onclick="openIframeAndLoadPage()">Start Game</button>
+  <button id="startButton" onclick="openGameInNewTab()">Start Game</button>
 
   <!-- iframeを使ってポップアップページを埋め込む部分 -->
   <div id="iframe-container">
