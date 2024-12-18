@@ -1,0 +1,36 @@
+name: Auto Commit JSON Files
+
+on:
+  push:
+    branches:
+      - main  # mainブランチへの変更がトリガー
+
+jobs:
+  commit-json:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js and Pyxel
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # 最新のNode.jsバージョンを使用
+
+    - name: Install dependencies for Pyxel
+      run: |
+        npm install -g pyxel  # Pyxelをグローバルにインストール（必要に応じてインストール）
+
+    - name: Download and run Pyxel game
+      run: |
+        mkdir -p output  # 結果を保存するディレクトリを作成
+        curl -o main.pyxapp https://rsakamot-star.github.io/MainPythonFile/main.pyxapp  # ゲームファイルをダウンロード
+        pyxel run main.pyxapp  # Pyxelゲームを実行して、結果を生成
+
+    - name: Commit and push generated JSON files
+      uses: EndBug/add-and-commit@v7
+      with:
+        author_name: 'GitHub Actions'
+        author_email: 'actions@github.com'
+        message: 'Update JSON files after running Pyxel game'
