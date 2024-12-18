@@ -3,29 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Popup and Pyxel Game</title>
+  <title>Start Pyxel Game</title>
   <script>
     let popupWindow;
 
-    // ページがロードされたときにポップアップを開く
-    window.onload = function() {
-      // 空のページをポップアップで開く
+    // ボタンがクリックされたときにポップアップを開き、その後URLを変更
+    function openPopupAndLoadPage() {
+      // まずポップアップウィンドウを開く
       popupWindow = window.open('about:blank', 'popup', 'width=600,height=400');
-    };
 
-    // ポップアップが開いてから指定されたURLをロード
-    function startGame() {
-      // 実際のページをポップアップで表示
-      if (popupWindow) {
-        popupWindow.location.href = 'https://rsakamoto.pythonanywhere.com'; // ここを指定されたURLに設定
-      }
+      // ポップアップが開いたら、URLを指定したページに変更
+      setTimeout(function() {
+        if (popupWindow) {
+          popupWindow.location.href = 'https://rsakamoto.pythonanywhere.com'; // ここで指定されたURLをポップアップにロード
+        }
+      }, 100); // 少し遅延させることで、ウィンドウのブロックを避けることができる場合があります
+
+      // ボタンを非表示にして、Pyxelゲームを表示
+      document.getElementById("startButton").style.display = 'none';
+      document.getElementById("pyxelGame").style.display = 'block'; // Pyxelゲームを表示
     }
   </script>
 </head>
 <body>
-  <button onclick="startGame()">Start Game</button>
-  <!-- Pyxelゲームの埋め込み -->
-  <script src="https://cdn.jsdelivr.net/gh/kitao/pyxel/wasm/pyxel.js"></script>
-  <pyxel-play root="https://rsakamot-star.github.io/testPython" name="main.pyxapp"></pyxel-play>
+  <!-- ボタンを配置 -->
+  <button id="startButton" onclick="openPopupAndLoadPage()">Start Game</button>
+
+  <!-- Pyxelゲームを埋め込む部分（最初は非表示） -->
+  <div id="pyxelGame" style="display: none;">
+    <script src="https://cdn.jsdelivr.net/gh/kitao/pyxel/wasm/pyxel.js"></script>
+    <pyxel-play root="https://rsakamot-star.github.io/testPython" name="main.pyxapp"></pyxel-play>
+  </div>
 </body>
 </html>
